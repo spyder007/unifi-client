@@ -1,0 +1,43 @@
+import React from 'react';
+import { useSelector } from 'react-redux';
+import { Redirect, Route } from "react-router-dom";
+import { AlertMessageList } from '../components/AlertMessageList/AlertMessageList';
+import { Footer } from '../components/Footer/Footer';
+import { NavMenu } from '../components/NavMenu/NavMenu';
+import { RootState } from '../store/rootReducer';
+
+interface DashboardProps {
+    component: any
+    path?: string;
+    exact?: boolean;
+    isPrivate?: boolean;
+  }
+  
+  export const DashboardPage: React.FC<DashboardProps> = (props) => {
+    const { component: Component, isPrivate: boolean, ...rest } = props;
+  
+    const layoutRender = (matchProps: any) => (
+      <React.Fragment>
+        <NavMenu />
+        <div className="container">
+          <AlertMessageList />
+          <Component {...matchProps} />
+        </div>
+        <Footer />
+      </React.Fragment>
+    );
+  
+    const renderRoute = () => {
+      if (props.isPrivate) {
+        const user = useSelector((state: RootState) => state.user.user)
+  
+        return user
+          ? (<Route {...rest} component={Component} />)
+          : (<Redirect to={'/login'} />)
+      }
+  
+      return (<Route {...rest} render={layoutRender} />);
+    };
+  
+    return renderRoute();
+  };
