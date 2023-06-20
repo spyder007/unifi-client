@@ -36,7 +36,7 @@ stages:
         pool:
           name: Scaled Pool - Ubuntu
         steps:
-          - template: build/npm/npm-build-test-steps-gitversion/npm-build-test-steps-gitversion-v1.yml@templates
+          - template: step_collections/npm-build-test.yml@templates
             parameters:
               artifactName: $(artifactName)
               runTests: false
