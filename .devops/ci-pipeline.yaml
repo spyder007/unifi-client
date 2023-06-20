@@ -40,7 +40,6 @@ stages:
             parameters:
               artifactName: $(artifactName)
               runTests: false
-              npmServiceConnection: acc-proget-npm-deploy
               zipBuildArtifacts: true
 
   # - stage: create_container_and_publish
