@@ -1,0 +1,78 @@
+resources:
+  repositories:
+    - repository: templates
+      type: BitBucket
+      endpoint: "Bitbucket - spydersoft"
+      name: spydersoftteam/azure-devops-templates
+    - repository: helmfileconfig
+      type: BitBucket
+      endpoint: Bitbucket - spydersoft
+      name: spydersoftteam/ha-helm-app-config
+
+variables:
+  #- group: confluence-credentials
+  - name: CI
+    value: true
+  - name: artifactName
+    value: tech-dect-calculator
+  - name: dockerRepository
+    value: internal_tools/architecture/tech-debt-calculator
+  - name: dockerServiceConnection
+    value: proget_docker
+  - name: branchTag
+    ${{ if contains(variables['Build.SourceBranch'], 'main') }}:
+      value: main
+    ${{ if not(contains(variables['Build.SourceBranch'], 'main')) }}:
+      value: feature
+
+trigger:
+  - main
+pr: none
+
+stages:
+  - stage: build
+    jobs:
+      - job: buildJob
+        pool:
+          name: Scaled Pool - Ubuntu
+        steps:
+          - template: build/npm/npm-build-test-steps-gitversion/npm-build-test-steps-gitversion-v1.yml@templates
+            parameters:
+              artifactName: $(artifactName)
+              runTests: false
+              npmServiceConnection: acc-proget-npm-deploy
+              zipBuildArtifacts: true
+
+  # - stage: create_container_and_publish
+  #   displayName: Create Container and Publish
+  #   condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/main'))
+  #   dependsOn: build
+  #   jobs:
+  #     - job: build_docker
+  #       pool:
+  #         name: Scaled Pool - Ubuntu
+  #       displayName: "Build and Push Container Image"
+  #       steps:
+  #         # Call docker template to build image and push to registry
+  #         - template: docker/docker-build-from-artifact/docker-build-from-artifact-v1.yml@templates
+  #           parameters:
+  #             artifactName: $(artifactName)
+  #             dockerRepository: $(dockerRepository)
+  #             dockerServiceConnection: $(dockerServiceConnection)
+  #             stagingFolder: "output"
+  #             versionTags: "$(branchTag)-$(build.buildnumber)"
+  #     - job: update_ops_repo
+  #       displayName: Update image version in Ops Repository
+  #       workspace:
+  #         clean: all
+  #       dependsOn:
+  #         - build_docker
+  #       pool:
+  #         name: "Scaled Pool - Ubuntu"
+  #       steps:
+  #         - template: publish/execute-cicd-script-in-repo/execute-cicd-script-in-repo-v1.yml@templates
+  #           parameters:
+  #             repositoryResource: gitops-repo
+  #             appName: tech-debt-calculator
+  #             additionalArguments: "$(branchTag)-$(build.buildnumber)"
+  #             commitMessage: Updated tech-debt-calculator appVersion to $(branchTag)-$(build.buildnumber)
