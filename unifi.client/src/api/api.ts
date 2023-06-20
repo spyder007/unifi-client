@@ -43,44 +43,6 @@ export interface Info {
 /**
  * 
  * @export
- * @interface IpBlock
- */
-export interface IpBlock {
-    /**
-     * 
-     * @type {number}
-     * @memberof IpBlock
-     */
-    min?: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof IpBlock
-     */
-    max?: number;
-}
-/**
- * 
- * @export
- * @interface IpGroup
- */
-export interface IpGroup {
-    /**
-     * 
-     * @type {string}
-     * @memberof IpGroup
-     */
-    name?: string | null;
-    /**
-     * 
-     * @type {Array<IpBlock>}
-     * @memberof IpGroup
-     */
-    blocks?: Array<IpBlock> | null;
-}
-/**
- * 
- * @export
  * @interface ProvisionRequest
  */
 export interface ProvisionRequest {
@@ -289,6 +251,12 @@ export interface UniClient {
      */
     objectType?: string | null;
     /**
+     * Gets or sets the IPBlock Name associated with this IP
+     * @type {string}
+     * @memberof UniClient
+     */
+    ipGroup?: string | null;
+    /**
      * 
      * @type {UniNote}
      * @memberof UniClient
@@ -344,12 +312,6 @@ export interface UnifiControllerOptions {
      * @memberof UnifiControllerOptions
      */
     password?: string | null;
-    /**
-     * 
-     * @type {Array<IpGroup>}
-     * @memberof UnifiControllerOptions
-     */
-    ipGroups?: Array<IpGroup> | null;
 }
 
 /**

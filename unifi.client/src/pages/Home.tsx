@@ -1,10 +1,8 @@
 import React from 'react';
-
-import { RouteComponentProps } from 'react-router';
 import { store } from '../store/store';
-import { showMessage } from '../store/slices/UserMessageSlice';
+import { showMessage } from '../store/slices/UserMessage';
 
-export const Home: React.FunctionComponent<RouteComponentProps> = (props: RouteComponentProps) => {
+export const Home: React.FunctionComponent = () => {
 
   const testMessage = (): void => {
     store.dispatch(showMessage({

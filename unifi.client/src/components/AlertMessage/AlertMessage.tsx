@@ -2,7 +2,7 @@ import { faExclamationCircle } from "@fortawesome/free-solid-svg-icons/faExclama
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 import { store } from "../../store/store";
-import { removeMessage } from "../../store/slices/UserMessageSlice";
+import { removeMessage } from "../../store/slices/UserMessage";
 import "./AlertMessage.scss";
 
 interface Props {

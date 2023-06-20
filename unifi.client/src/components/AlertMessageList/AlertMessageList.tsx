@@ -1,7 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "../../store/rootReducer";
-import { UserMessage } from "../../store/slices/UserMessageSlice";
+import { UserMessage } from "../../store/slices/UserMessage";
 import { AlertMessage } from "../AlertMessage/AlertMessage";
 import "./AlertMessageList.scss";
 

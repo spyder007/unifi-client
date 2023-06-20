@@ -1,6 +1,9 @@
-$outFolder = ".\openapiclient"
+param (
+    $baseUrl = "https://api.mattgerega.com/unifi/ipmanager"    
+)
 
-& npx @openapitools/openapi-generator-cli generate -g typescript-axios -o "$outFolder" -i "https://api.mattgerega.com/unifi/ipmanager/swagger/unifi.ipmanager/swagger.json"
+$outFolder = ".\openapiclient"
+& npx @openapitools/openapi-generator-cli generate -g typescript-axios -o "$outFolder" -i "$baseUrl/swagger/unifi.ipmanager/swagger.json"
 
 Write-Host "Copying files to .\src\api"
 Copy-Item "$outfolder\api.ts" ".\src\api\"

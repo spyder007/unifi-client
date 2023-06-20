@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { SimplePage } from '../layouts/SimplePage'
 import { Home } from "../pages/Home";
 import { Clients } from "../pages/clients";
@@ -6,10 +6,14 @@ import { Login } from "../pages/login";
 
 export const AppRouter = () => (
   <Router basename={'/'}>
-    <Switch>
-      <SimplePage path={`/login`} component={Login} isPrivate={false} />
-      <SimplePage path={`/clients`} component={Clients} isPrivate={false} />
-      <SimplePage exact path={`/`} component={Home} isPrivate={false} />
-    </Switch>
+    <Routes>
+      <Route element={<SimplePage isPrivate={false} />}>
+        <Route path={`/login`} element={<Login />} />
+        <Route path={`/`} element={<Home />} />
+      </Route>
+      <Route element={<SimplePage isPrivate={true} />}>
+        <Route path={`/clients`} element={<Clients />} />
+      </Route>
+    </Routes>
   </Router>
 );

@@ -1,5 +1,6 @@
-import { configureStore, Action } from "@reduxjs/toolkit";
-import { ThunkAction } from "redux-thunk";
+import { configureStore, AnyAction } from "@reduxjs/toolkit";
+import { useDispatch } from "react-redux";
+import { ThunkAction, ThunkDispatch } from "redux-thunk";
 import { rootReducer, RootState } from "./rootReducer";
 
 export const store = configureStore({
@@ -7,8 +8,12 @@ export const store = configureStore({
   middleware: (getDefaultMiddleware) => getDefaultMiddleware({
     serializableCheck: false
   })
-});
+}); 
 
+type AppState = ReturnType<typeof rootReducer>;
+type TypedDispatch<T> = ThunkDispatch<T, any, AnyAction>;
 export type AppDispatch = typeof store.dispatch;
 
-export type AppThunk = ThunkAction<void, RootState, null, Action<string>>;
+export type AppThunk = ThunkAction<void, RootState, null, AnyAction>;
+
+export const useAppDispatch = () => useDispatch<TypedDispatch<AppState>>();

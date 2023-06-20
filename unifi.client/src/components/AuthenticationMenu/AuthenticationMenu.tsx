@@ -4,7 +4,7 @@ import { AccountInfo } from "@azure/msal-browser";
 import { AuthenticatedTemplate, UnauthenticatedTemplate } from "@azure/msal-react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../store/rootReducer";
-import { setUser } from "../../store/slices/UserSlice";
+import { setUser } from "../../store/slices/User";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMicrosoft } from '@fortawesome/free-brands-svg-icons/faMicrosoft';
 
@@ -49,7 +49,7 @@ export const AuthenticationMenu = (): JSX.Element => {
     return (
         <ul className="navbar-nav">
             <li className="nav-item dropdown">
-                <button className="nav-link dropdown-toggle" id="navbarDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                <button className="nav-link dropdown-toggle btn" id="navbarDropdown" data-bs-toggle="dropdown" aria-expanded="false">
                     <FontAwesomeIcon icon={faMicrosoft} ></FontAwesomeIcon>
                 </button>
                 <ul className="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">

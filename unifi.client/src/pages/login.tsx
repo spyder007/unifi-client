@@ -1,5 +1,5 @@
 import React from 'react'
-import { Redirect } from 'react-router-dom'
+import { Navigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { RootState } from '../store/rootReducer';
 
@@ -12,7 +12,7 @@ export const Login: React.FC<{}> = () => {
 
   return (
     (user) ?
-      (<Redirect to={'/'} />)
+      (<Navigate to={'/'} />)
       :
       (
         <div>
