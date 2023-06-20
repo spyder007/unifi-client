@@ -34,7 +34,7 @@ stages:
     jobs:
       - job: buildJob
         pool:
-          name: Scaled Pool - Ubuntu
+          name: Default
         steps:
           - template: step_collections/npm-build-test.yml@templates
             parameters:
