@@ -14,9 +14,9 @@ variables:
   - name: CI
     value: true
   - name: artifactName
-    value: tech-dect-calculator
+    value: unifi-client
   - name: dockerRepository
-    value: internal_tools/architecture/tech-debt-calculator
+    value: spydersoft/ha/unifi.client
   - name: dockerServiceConnection
     value: proget_docker
   - name: branchTag
@@ -42,24 +42,19 @@ stages:
               runTests: false
               zipBuildArtifacts: true
 
-  # - stage: create_container_and_publish
-  #   displayName: Create Container and Publish
-  #   condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/main'))
-  #   dependsOn: build
-  #   jobs:
-  #     - job: build_docker
-  #       pool:
-  #         name: Scaled Pool - Ubuntu
-  #       displayName: "Build and Push Container Image"
-  #       steps:
-  #         # Call docker template to build image and push to registry
-  #         - template: docker/docker-build-from-artifact/docker-build-from-artifact-v1.yml@templates
-  #           parameters:
-  #             artifactName: $(artifactName)
-  #             dockerRepository: $(dockerRepository)
-  #             dockerServiceConnection: $(dockerServiceConnection)
-  #             stagingFolder: "output"
-  #             versionTags: "$(branchTag)-$(build.buildnumber)"
+  - stage: create_container_and_publish
+    displayName: Create Container and Publish
+    condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/main'))
+    dependsOn: build
+    jobs:
+      - template: jobs/docker-image-build-job.yml
+        parameters:
+          dockerImageName: $(dockerRepository)
+          containerRegistryName: proget_docker
+          containerRegistryUrl: proget.mattgerega.com
+          artifactName: $(artifactName)
+          artifactZipName: $(artifactName)
+          dockerImageFileName: unifi_client
   #     - job: update_ops_repo
   #       displayName: Update image version in Ops Repository
   #       workspace:
