@@ -47,7 +47,7 @@ stages:
     condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/main'))
     dependsOn: build
     jobs:
-      - template: jobs/docker-image-build-job.yml
+      - template: jobs/docker-image-build-job.yml@templates
         parameters:
           dockerImageName: $(dockerRepository)
           containerRegistryName: proget_docker
