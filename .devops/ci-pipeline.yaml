@@ -27,6 +27,7 @@ variables:
 
 trigger:
   - main
+  - feature/*
 pr: none
 
 stages:
@@ -42,9 +43,8 @@ stages:
               runTests: false
               zipBuildArtifacts: true
 
-  - stage: create_container_and_publish
+  - stage: docker_publish
     displayName: Create Container and Publish
-    condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/main'))
     dependsOn: build
     jobs:
       - template: jobs/docker-image-job.yml@templates
@@ -66,18 +66,20 @@ stages:
                 script: |
                   cp -r $(Build.SourcesDirectory)/nginx $(Pipeline.Workspace)/dockerFiles
 
-  # - stage: updateHelmConfig
-  #   displayName: Update Helm Config Repository
-  #   dependsOn:
-  #   - docker_publish
-  #   jobs:
-  #   - job: updateHelmConfigJob
-  #     pool:
-  #       name: Default
-  #     steps:
-  #     - template: publish/helmfileconfig/steps-process-cicd/v1.yml@templates
-  #       parameters:
-  #         repositoryResource: helmfileconfig
-  #         branchName: $(Build.SourceBranch)
-  #         tagsCollection: unifi_client=$(build.buildnumber)
-  #         commitMessage: Updated unifi_client to $(build.buildnumber)
+  - stage: updateHelmConfig
+    displayName: Update Helm Config Repository
+    dependsOn:
+      - docker_publish
+    jobs:
+      - job: updateHelmConfigJob
+        pool:
+          name: Default
+        workspace:
+          clean: all
+        steps:
+          - template: publish/helmfileconfig/steps-process-cicd/v1.yml@templates
+            parameters:
+              repositoryResource: helmfileconfig
+              branchName: $(Build.SourceBranch)
+              tagsCollection: unifi_client=$(build.buildnumber)
+              commitMessage: Updated unifi_client to $(build.buildnumber)
