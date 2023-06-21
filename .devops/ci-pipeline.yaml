@@ -55,18 +55,20 @@ stages:
           artifactName: $(artifactName)
           artifactZipName: $(artifactName)
           dockerImageFileName: unifi_client
-  #     - job: update_ops_repo
-  #       displayName: Update image version in Ops Repository
-  #       workspace:
-  #         clean: all
-  #       dependsOn:
-  #         - build_docker
-  #       pool:
-  #         name: "Scaled Pool - Ubuntu"
-  #       steps:
-  #         - template: publish/execute-cicd-script-in-repo/execute-cicd-script-in-repo-v1.yml@templates
-  #           parameters:
-  #             repositoryResource: gitops-repo
-  #             appName: tech-debt-calculator
-  #             additionalArguments: "$(branchTag)-$(build.buildnumber)"
-  #             commitMessage: Updated tech-debt-calculator appVersion to $(branchTag)-$(build.buildnumber)
+          dockerFilePath: $(Build.SourcesDirectory)/Dockerfile
+
+  # - stage: updateHelmConfig
+  #   displayName: Update Helm Config Repository
+  #   dependsOn:
+  #   - docker_publish
+  #   jobs:
+  #   - job: updateHelmConfigJob
+  #     pool:
+  #       name: Default
+  #     steps:
+  #     - template: publish/helmfileconfig/steps-process-cicd/v1.yml@templates
+  #       parameters:
+  #         repositoryResource: helmfileconfig
+  #         branchName: $(Build.SourceBranch)
+  #         tagsCollection: unifi_client=$(build.buildnumber)
+  #         commitMessage: Updated unifi_client to $(build.buildnumber)
