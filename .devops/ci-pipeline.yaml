@@ -56,13 +56,15 @@ stages:
           artifactZipName: $(artifactName)
           dockerImageFileName: unifi_client
           dockerFilePath: $(Build.SourcesDirectory)/Dockerfile
+          dockerBuildBasePath: $(Pipeline.Workspace)/dockerFiles
+          artifactTargetPath: output
           prebuild_steps:
             - task: Bash@3
               displayName: Copy Nginx files to build folder
               inputs:
                 targetType: "inline"
                 script: |
-                  cp -r $(Build.SourcesDirectory)/nginx $(Pipeline.Workspace)/publishFiles
+                  cp -r $(Build.SourcesDirectory)/nginx $(Pipeline.Workspace)/dockerFiles
 
   # - stage: updateHelmConfig
   #   displayName: Update Helm Config Repository
