@@ -1,12 +1,13 @@
 import { Configuration, LogLevel } from "@azure/msal-browser";
 import { ProtocolMode } from "@azure/msal-common";
+import { getAuthConfig } from "../components/Config";
 
 export const MSAL_CONFIG: Configuration = {
   auth: {
-    authority: "https://auth.mattgerega.net/",
-    clientId: "unifiwebclient",
-    knownAuthorities: ["https://auth.mattgerega.net/"],
-    redirectUri: "http://localhost:3000",
+    authority: getAuthConfig("authority"),
+    clientId: getAuthConfig("clientId"),
+    knownAuthorities: [getAuthConfig("authority")],
+    redirectUri: getAuthConfig("redirectUri"),
     protocolMode: ProtocolMode.OIDC,
   },
   cache: {

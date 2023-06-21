@@ -1,7 +1,7 @@
 import { AxiosPromise, AxiosResponse } from "axios";
 import { AzureAuthenticationContext } from "./authProvider";
 import { AuthenticationResult, SilentRequest } from "@azure/msal-browser";
-//import config from 'react-global-configuration';
+import { getApiConfig } from "../components/Config";
 import { applicationScopes } from "./authProvider";
 
 class ApiWrapper {
@@ -36,8 +36,7 @@ class ApiWrapper {
   public callWithToken<T>(
     fn: (headers: any, baseUrl: string) => AxiosPromise<T>
   ): AxiosPromise<T> {
-    const baseUrl = "https://api.mattgerega.net/unifi/ipmanager";
-    //const baseUrl = "http://localhost:5000";
+    const baseUrl = getApiConfig("backend") || "http://localhost:5000";
     if (!this.accessToken) {
       const accounts =
         AzureAuthenticationContext.getInstance().pcaInstance.getAllAccounts();
