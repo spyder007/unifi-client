@@ -28,3 +28,12 @@ yarn-error.log*
 openapitools.json
 .eslintcache
 **/output
+.pnp.*
+
+# Yarn Modern
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions
