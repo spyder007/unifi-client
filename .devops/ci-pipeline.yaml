@@ -37,10 +37,10 @@ stages:
         pool:
           name: Default
         steps:
-          - template: step_collections/npm-build-test.yml@templates
+          - template: step_collections/yarn-build-test.yml@templates
             parameters:
               artifactName: $(artifactName)
-              runTests: false
+              runTests: true
               zipBuildArtifacts: true
 
   - stage: docker_publish

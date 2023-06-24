@@ -58,13 +58,7 @@ export const ClientList: React.FunctionComponent<{}> = (): JSX.Element => {
       headerName: "IP",
       sortable: true,
       initialSort,
-      comparator: (
-        valueA: string,
-        valueB: string,
-        nodeA: any,
-        nodeB: any,
-        isInverted: boolean
-      ): number => {
+      comparator: (valueA: string, valueB: string): number => {
         return compareIpAddresses(valueA, valueB);
       },
     },

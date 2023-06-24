@@ -28,10 +28,10 @@ export const NavMenu: React.FunctionComponent<NavigationBarProperties> = (
           <FontAwesomeIcon icon={faBars} />
         </button>
         <Link className="navbar-brand text-primary d-none d-lg-block" to="/">
-          Big Screen Title
+          Unifi Client
         </Link>
         <Link className="navbar-brand text-primary d-lg-none" to="/">
-          Small Title
+          UC
         </Link>
 
         <div id="navMenuCollapse" className="collapse navbar-collapse">

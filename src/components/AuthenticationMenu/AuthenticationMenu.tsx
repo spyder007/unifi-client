@@ -10,6 +10,7 @@ import { RootState } from "../../store/rootReducer";
 import { setUser } from "../../store/slices/User";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMicrosoft } from "@fortawesome/free-brands-svg-icons/faMicrosoft";
+import { faUser } from "@fortawesome/free-solid-svg-icons";
 
 const ua = window.navigator.userAgent;
 const msie = ua.indexOf("MSIE ");
@@ -55,7 +56,12 @@ export const AuthenticationMenu = (): JSX.Element => {
           data-bs-toggle="dropdown"
           aria-expanded="false"
         >
-          <FontAwesomeIcon icon={faMicrosoft}></FontAwesomeIcon>
+          <AuthenticatedTemplate>
+            <FontAwesomeIcon icon={faUser}></FontAwesomeIcon>
+          </AuthenticatedTemplate>
+          <UnauthenticatedTemplate>
+            <FontAwesomeIcon icon={faMicrosoft}></FontAwesomeIcon>
+          </UnauthenticatedTemplate>
         </button>
         <ul
           className="dropdown-menu dropdown-menu-end"
