@@ -55,7 +55,7 @@ stages:
           artifactZipName: $(artifactName)
           dockerFilePath: $(Build.SourcesDirectory)/Dockerfile
           artifactTargetPath: output
-          prebuild_steps:
+          prebuildSteps:
             - task: Bash@3
               displayName: Copy Nginx files to build folder
               inputs:
