@@ -47,7 +47,7 @@ stages:
     displayName: Create Container and Publish
     dependsOn: build
     jobs:
-      - template: jobs/build-docker-image.yml@templates
+      - template: jobs/build-docker-image/v1.yml@templates
         parameters:
           dockerImageName: $(dockerRepository)
           containerRegistryName: proget_docker
