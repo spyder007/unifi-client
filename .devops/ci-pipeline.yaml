@@ -47,18 +47,16 @@ stages:
     displayName: Create Container and Publish
     dependsOn: build
     jobs:
-      - template: jobs/docker-image-job.yml@templates
+      - template: jobs/build-docker-image/v1.yml@templates
         parameters:
           dockerImageName: $(dockerRepository)
           containerRegistryName: proget_docker
-          containerRegistryUrl: proget.mattgerega.com
           artifactName: $(artifactName)
           artifactZipName: $(artifactName)
-          dockerImageFileName: unifi_client
           dockerFilePath: $(Build.SourcesDirectory)/Dockerfile
           dockerBuildBasePath: $(Pipeline.Workspace)/dockerFiles
           artifactTargetPath: output
-          prebuild_steps:
+          prebuildSteps:
             - task: Bash@3
               displayName: Copy Nginx files to build folder
               inputs:
