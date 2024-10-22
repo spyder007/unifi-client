@@ -75,7 +75,7 @@ stages:
         workspace:
           clean: all
         steps:
-          - template: publish/helmfileconfig/steps-process-cicd/v1.yml@templates
+          - template: publish/step_collections/process-cicd-script/v1.yml@templates
             parameters:
               repositoryResource: helmfileconfig
               branchName: $(Build.SourceBranch)
