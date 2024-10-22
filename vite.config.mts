@@ -26,8 +26,10 @@ export default defineConfig({
     environment: "jsdom",
     globals: true,
     setupFiles: "./tests/setup.js",
-    deps: {
-      inline: ["ag-grid-react"],
+    server: {
+      deps: {
+        inline: ["ag-grid-react"],
+      },
     },
     reporters: ["html", "junit"],
     outputFile: "./output/test/junit.xml",
