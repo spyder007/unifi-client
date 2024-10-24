@@ -5,10 +5,10 @@ import React from "react";
 import { Link } from "react-router-dom";
 import "./NavMenu.scss";
 
-export type NavigationBarProperties = {
+export interface NavigationBarProperties {
   brand?: string;
   children?: React.ReactNode;
-};
+}
 
 export const NavMenu: React.FunctionComponent<NavigationBarProperties> = (
   props: NavigationBarProperties

@@ -1,4 +1,3 @@
-/* tslint:disable */
 /* eslint-disable */
 /**
  * Unifi IP Manager API
@@ -335,7 +334,7 @@ export interface UnifiControllerOptions {
  * @export
  */
 export const ClientApiAxiosParamCreator = function (
-  configuration?: Configuration
+  configuration?: Configuration,
 ) {
   return {
     /**
@@ -346,13 +345,13 @@ export const ClientApiAxiosParamCreator = function (
      */
     clientDeleteClient: async (
       mac: string,
-      options: any = {}
+      options: any = {},
     ): Promise<RequestArgs> => {
       // verify required parameter 'mac' is not null or undefined
       assertParamExists("clientDeleteClient", "mac", mac);
       const localVarPath = `/client/{mac}`.replace(
         `{${"mac"}}`,
-        encodeURIComponent(String(mac))
+        encodeURIComponent(String(mac)),
       );
       // use dummy base URL string because the URL constructor only accepts absolute URLs.
       const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -428,13 +427,13 @@ export const ClientApiAxiosParamCreator = function (
      */
     clientProvisionClient: async (
       provisionRequest: ProvisionRequest,
-      options: any = {}
+      options: any = {},
     ): Promise<RequestArgs> => {
       // verify required parameter 'provisionRequest' is not null or undefined
       assertParamExists(
         "clientProvisionClient",
         "provisionRequest",
-        provisionRequest
+        provisionRequest,
       );
       const localVarPath = `/client/provision`;
       // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -465,7 +464,7 @@ export const ClientApiAxiosParamCreator = function (
       localVarRequestOptions.data = serializeDataIfNeeded(
         provisionRequest,
         localVarRequestOptions,
-        configuration
+        configuration,
       );
 
       return {
@@ -491,7 +490,7 @@ export const ClientApiFp = function (configuration?: Configuration) {
      */
     async clientDeleteClient(
       mac: string,
-      options?: any
+      options?: any,
     ): Promise<
       (axios?: AxiosInstance, basePath?: string) => AxiosPromise<ServiceResult>
     > {
@@ -501,7 +500,7 @@ export const ClientApiFp = function (configuration?: Configuration) {
         localVarAxiosArgs,
         globalAxios,
         BASE_PATH,
-        configuration
+        configuration,
       );
     },
     /**
@@ -511,21 +510,20 @@ export const ClientApiFp = function (configuration?: Configuration) {
      * @throws {RequiredError}
      */
     async clientGet(
-      options?: any
+      options?: any,
     ): Promise<
       (
         axios?: AxiosInstance,
-        basePath?: string
+        basePath?: string,
       ) => AxiosPromise<ServiceResultOfListOfUniClient>
     > {
-      const localVarAxiosArgs = await localVarAxiosParamCreator.clientGet(
-        options
-      );
+      const localVarAxiosArgs =
+        await localVarAxiosParamCreator.clientGet(options);
       return createRequestFunction(
         localVarAxiosArgs,
         globalAxios,
         BASE_PATH,
-        configuration
+        configuration,
       );
     },
     /**
@@ -536,23 +534,23 @@ export const ClientApiFp = function (configuration?: Configuration) {
      */
     async clientProvisionClient(
       provisionRequest: ProvisionRequest,
-      options?: any
+      options?: any,
     ): Promise<
       (
         axios?: AxiosInstance,
-        basePath?: string
+        basePath?: string,
       ) => AxiosPromise<ServiceResultOfUniClient>
     > {
       const localVarAxiosArgs =
         await localVarAxiosParamCreator.clientProvisionClient(
           provisionRequest,
-          options
+          options,
         );
       return createRequestFunction(
         localVarAxiosArgs,
         globalAxios,
         BASE_PATH,
-        configuration
+        configuration,
       );
     },
   };
@@ -565,7 +563,7 @@ export const ClientApiFp = function (configuration?: Configuration) {
 export const ClientApiFactory = function (
   configuration?: Configuration,
   basePath?: string,
-  axios?: AxiosInstance
+  axios?: AxiosInstance,
 ) {
   const localVarFp = ClientApiFp(configuration);
   return {
@@ -577,7 +575,7 @@ export const ClientApiFactory = function (
      */
     clientDeleteClient(
       mac: string,
-      options?: any
+      options?: any,
     ): AxiosPromise<ServiceResult> {
       return localVarFp
         .clientDeleteClient(mac, options)
@@ -602,7 +600,7 @@ export const ClientApiFactory = function (
      */
     clientProvisionClient(
       provisionRequest: ProvisionRequest,
-      options?: any
+      options?: any,
     ): AxiosPromise<ServiceResultOfUniClient> {
       return localVarFp
         .clientProvisionClient(provisionRequest, options)
@@ -653,7 +651,7 @@ export class ClientApi extends BaseAPI {
    */
   public clientProvisionClient(
     provisionRequest: ProvisionRequest,
-    options?: any
+    options?: any,
   ) {
     return ClientApiFp(this.configuration)
       .clientProvisionClient(provisionRequest, options)
@@ -666,7 +664,7 @@ export class ClientApi extends BaseAPI {
  * @export
  */
 export const InfoApiAxiosParamCreator = function (
-  configuration?: Configuration
+  configuration?: Configuration,
 ) {
   return {
     /**
@@ -723,18 +721,17 @@ export const InfoApiFp = function (configuration?: Configuration) {
      * @throws {RequiredError}
      */
     async infoGet(
-      options?: any
+      options?: any,
     ): Promise<
       (axios?: AxiosInstance, basePath?: string) => AxiosPromise<Info>
     > {
-      const localVarAxiosArgs = await localVarAxiosParamCreator.infoGet(
-        options
-      );
+      const localVarAxiosArgs =
+        await localVarAxiosParamCreator.infoGet(options);
       return createRequestFunction(
         localVarAxiosArgs,
         globalAxios,
         BASE_PATH,
-        configuration
+        configuration,
       );
     },
   };
@@ -747,7 +744,7 @@ export const InfoApiFp = function (configuration?: Configuration) {
 export const InfoApiFactory = function (
   configuration?: Configuration,
   basePath?: string,
-  axios?: AxiosInstance
+  axios?: AxiosInstance,
 ) {
   const localVarFp = InfoApiFp(configuration);
   return {

@@ -1,4 +1,3 @@
-/* tslint:disable */
 /* eslint-disable */
 /**
  * Unifi IP Manager API
@@ -51,7 +50,7 @@ export class BaseAPI {
   constructor(
     configuration?: Configuration,
     protected basePath: string = BASE_PATH,
-    protected axios: AxiosInstance = globalAxios
+    protected axios: AxiosInstance = globalAxios,
   ) {
     if (configuration) {
       this.configuration = configuration;
@@ -68,7 +67,10 @@ export class BaseAPI {
  */
 export class RequiredError extends Error {
   name: "RequiredError" = "RequiredError";
-  constructor(public field: string, msg?: string) {
+  constructor(
+    public field: string,
+    msg?: string,
+  ) {
     super(msg);
   }
 }

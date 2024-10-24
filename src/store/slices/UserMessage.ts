@@ -1,10 +1,9 @@
-/* eslint-disable no-param-reassign */
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-export type UserMessage = {
+export interface UserMessage {
   messageType: "error" | "info" | "warning" | "success";
   message: string;
-};
+}
 
 export interface UserMessageSliceState {
   messages: UserMessage[];
@@ -20,7 +19,7 @@ const userMessageSlice = createSlice({
       const maybeExistingMessage = state.messages.find(
         ({ messageType, message }) =>
           message.indexOf(action.payload.message) === 0 &&
-          action.payload.messageType === messageType
+          action.payload.messageType === messageType,
       );
 
       // only add more error messages if the message isn't already displayed.
@@ -32,13 +31,13 @@ const userMessageSlice = createSlice({
       const index = state.messages.findIndex(
         ({ messageType, message }) =>
           message.indexOf(action.payload.message) === 0 &&
-          action.payload.messageType === messageType
+          action.payload.messageType === messageType,
       );
       if (index > -1) {
         state.messages.splice(index, 1);
       }
     },
-    clearMessages: (state, action: PayloadAction<void>): void => {
+    clearMessages: (state): void => {
       state.messages = [];
     },
     showMessage: (state, action: PayloadAction<UserMessage>): void => {

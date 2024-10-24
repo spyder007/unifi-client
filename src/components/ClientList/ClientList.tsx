@@ -25,7 +25,7 @@ export const ClientList: React.FunctionComponent<{}> = (): JSX.Element => {
   const filter = "";
   const initialSort: "asc" | "desc" | null | undefined = "asc";
   useEffect(() => {
-    dispatch(fetchClientList(filter, 10));
+    dispatch(fetchClientList(filter));
   }, [user, dispatch, filter]);
 
   const compareIpAddresses = (ipA: string, ipB: string): number => {
@@ -33,7 +33,7 @@ export const ClientList: React.FunctionComponent<{}> = (): JSX.Element => {
       ipA
         .split(".")
         .map((num, idx) => parseInt(num) * Math.pow(2, (3 - idx) * 8))
-        // eslint-disable-next-line
+         
         .reduce((a, v) => ((a += v), a), 0)
     );
 
@@ -41,7 +41,7 @@ export const ClientList: React.FunctionComponent<{}> = (): JSX.Element => {
       ipB
         .split(".")
         .map((num, idx) => parseInt(num) * Math.pow(2, (3 - idx) * 8))
-        // eslint-disable-next-line
+         
         .reduce((a, v) => ((a += v), a), 0)
     );
 

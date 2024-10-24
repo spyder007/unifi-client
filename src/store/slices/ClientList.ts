@@ -1,4 +1,3 @@
-/* eslint-disable no-param-reassign */
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import * as api from "../../api/api";
 import ApiWrapper, { checkCommunicationError } from "../../utils/apiWrapper";
@@ -55,7 +54,7 @@ const clientListSlice = createSlice({
         state.expandedObjectIds.push(action.payload);
       } else {
         const currentIndex = state.expandedObjectIds.findIndex(
-          (element) => element === action.payload
+          (element) => element === action.payload,
         );
         if (currentIndex === -1) {
           state.expandedObjectIds.push(action.payload);
@@ -81,7 +80,7 @@ export const deleteClient =
     const apiWrapper: ApiWrapper = ApiWrapper.getInstance();
 
     const result = await apiWrapper.callWithToken((headers, baseUrl) =>
-      api.ClientApiFactory(undefined, baseUrl).clientDeleteClient(mac, headers)
+      api.ClientApiFactory(undefined, baseUrl).clientDeleteClient(mac, headers),
     );
     const error = checkCommunicationError(result);
     if (error) {
@@ -89,23 +88,23 @@ export const deleteClient =
         addMessage({
           messageType: "error",
           message: error,
-        })
+        }),
       );
       dispatch(getClientListCompleted());
     } else {
-      dispatch(fetchClientList(filter, 10));
+      dispatch(fetchClientList(filter));
     }
   };
 
 export const fetchClientList =
-  (filter?: string, pageSize = 30): AppThunk =>
+  (filter?: string): AppThunk =>
   async (dispatch): Promise<void> => {
     dispatch(getClientListStart());
     dispatch(clearMessages());
     const apiWrapper: ApiWrapper = ApiWrapper.getInstance();
 
     const result = await apiWrapper.callWithToken((headers, baseUrl) =>
-      api.ClientApiFactory(undefined, baseUrl).clientGet(headers)
+      api.ClientApiFactory(undefined, baseUrl).clientGet(headers),
     );
     const error = checkCommunicationError(result);
     if (error) {
@@ -113,7 +112,7 @@ export const fetchClientList =
         addMessage({
           messageType: "error",
           message: error,
-        })
+        }),
       );
       dispatch(getClientListCompleted());
     } else {
@@ -121,7 +120,7 @@ export const fetchClientList =
         getClientList({
           data: result.data,
           filter,
-        })
+        }),
       );
     }
   };
