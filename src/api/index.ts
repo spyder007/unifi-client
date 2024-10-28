@@ -1,5 +1,3 @@
-/* tslint:disable */
-/* eslint-disable */
 /**
  * Unifi IP Manager API
  * API Wrapper for the Unifi Controller

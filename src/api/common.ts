@@ -1,4 +1,3 @@
-/* tslint:disable */
 /* eslint-disable */
 /**
  * Unifi IP Manager API
@@ -30,12 +29,12 @@ export const DUMMY_BASE_URL = "https://example.com";
 export const assertParamExists = function (
   functionName: string,
   paramName: string,
-  paramValue: unknown
+  paramValue: unknown,
 ) {
   if (paramValue === null || paramValue === undefined) {
     throw new RequiredError(
       paramName,
-      `Required parameter ${paramName} was null or undefined when calling ${functionName}.`
+      `Required parameter ${paramName} was null or undefined when calling ${functionName}.`,
     );
   }
 };
@@ -47,7 +46,7 @@ export const assertParamExists = function (
 export const setApiKeyToObject = async function (
   object: any,
   keyParamName: string,
-  configuration?: Configuration
+  configuration?: Configuration,
 ) {
   if (configuration && configuration.apiKey) {
     const localVarApiKeyValue =
@@ -64,7 +63,7 @@ export const setApiKeyToObject = async function (
  */
 export const setBasicAuthToObject = function (
   object: any,
-  configuration?: Configuration
+  configuration?: Configuration,
 ) {
   if (configuration && (configuration.username || configuration.password)) {
     object["auth"] = {
@@ -80,7 +79,7 @@ export const setBasicAuthToObject = function (
  */
 export const setBearerAuthToObject = async function (
   object: any,
-  configuration?: Configuration
+  configuration?: Configuration,
 ) {
   if (configuration && configuration.accessToken) {
     const accessToken =
@@ -99,7 +98,7 @@ export const setOAuthToObject = async function (
   object: any,
   name: string,
   scopes: string[],
-  configuration?: Configuration
+  configuration?: Configuration,
 ) {
   if (configuration && configuration.accessToken) {
     const localVarAccessTokenValue =
@@ -138,7 +137,7 @@ export const setSearchParams = function (url: URL, ...objects: any[]) {
 export const serializeDataIfNeeded = function (
   value: any,
   requestOptions: any,
-  configuration?: Configuration
+  configuration?: Configuration,
 ) {
   const nonString = typeof value !== "string";
   const needsSerialization =
@@ -166,7 +165,7 @@ export const createRequestFunction = function (
   axiosArgs: RequestArgs,
   globalAxios: AxiosInstance,
   BASE_PATH: string,
-  configuration?: Configuration
+  configuration?: Configuration,
 ) {
   return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
     const axiosRequestArgs = {

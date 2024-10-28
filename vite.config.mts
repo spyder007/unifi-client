@@ -1,19 +1,12 @@
 import { defineConfig } from "vitest/config";
 import react from "@vitejs/plugin-react";
 import checker from "vite-plugin-checker";
-import viteTsconfigPaths from "vite-tsconfig-paths";
+import tsconfigPaths from "vite-tsconfig-paths";
 
 export default defineConfig({
   plugins: [
     react(),
-    checker({
-      overlay: { initialIsOpen: false },
-      typescript: true,
-      eslint: {
-        lintCommand: 'eslint "./src/**/*.{ts,tsx}"',
-      },
-    }),
-    viteTsconfigPaths(),
+    tsconfigPaths(),
     //   svgrPlugin(),
     //   handlebars({
     //     partialDirectory: resolve(__dirname, 'src/partials'),
@@ -26,8 +19,10 @@ export default defineConfig({
     environment: "jsdom",
     globals: true,
     setupFiles: "./tests/setup.js",
-    deps: {
-      inline: ["ag-grid-react"],
+    server: {
+      deps: {
+        inline: ["ag-grid-react"],
+      },
     },
     reporters: ["html", "junit"],
     outputFile: "./output/test/junit.xml",
