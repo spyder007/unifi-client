@@ -16,9 +16,9 @@ variables:
   - name: artifactName
     value: unifi-client
   - name: dockerRepository
-    value: spydersoft/ha/unifi.client
+    value: spyder007/unifi-client
   - name: dockerServiceConnection
-    value: proget_docker
+    value: github-spydersoft-docker
   - name: branchTag
     ${{ if contains(variables['Build.SourceBranch'], 'main') }}:
       value: main
@@ -51,7 +51,7 @@ stages:
       - template: jobs/build-docker-image/v1.yml@templates
         parameters:
           dockerImageName: $(dockerRepository)
-          containerRegistryName: proget_docker
+          containerRegistryName: $(dockerServiceConnection)
           artifactName: $(artifactName)
           artifactZipName: $(artifactName)
           dockerFilePath: $(Build.SourcesDirectory)/Dockerfile
