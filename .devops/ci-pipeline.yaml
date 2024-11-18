@@ -44,6 +44,9 @@ stages:
               zipBuildArtifacts: true
               useYarn2: true
               preBuildSteps:
+                - checkout: self
+                  fetchDepth: 0
+                  clean: true
                 - task: gitversion/setup@3.0.0
                   displayName: Setup GitVersion on Agent
                   inputs:
