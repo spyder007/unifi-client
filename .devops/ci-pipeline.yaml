@@ -37,7 +37,7 @@ stages:
         pool:
           name: Default
         steps:
-          - template: step_collections/yarn-build-test.yml@templates
+          - template: step_collections/yarn-build-test/v1.yml@templates
             parameters:
               artifactName: $(artifactName)
               runTests: true
